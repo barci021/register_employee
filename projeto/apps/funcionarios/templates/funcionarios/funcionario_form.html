@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block main %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{ form|bootstrap }}
+
+    <button type="submit" class="btn btn-main">Salvar</button>
+</form>
+
+<br>
+
+<br>
+
+
+
+<br>
+<h2>Banco de horas</h2>
+<ul>
+{% for registro_hora in object.registrohoraextra_set.all %}
+    <li>
+        <a href="{% url 'update_hora_extra' registro_hora.id %}">
+            {{ registro_hora.motivo  }} | {{ registro_hora.horas }} <br>
+        </a>
+    </li>
+{% endfor %}
+</ul>
+
+<h3>Total de horas extras: {{ object.total_horas_extra }} </h3>
+
+{% endblock %}
